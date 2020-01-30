@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyApp.Views.AlbumList">
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding RefreshList}">
+                <CollectionView ItemsSource="{Binding albumList}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="86">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="3"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="3"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image  Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Aspect="AspectFill" Source="{Binding DemoImage}" />
+
+                                <StackLayout Grid.Row="1" Grid.Column="3" Orientation="Horizontal">
+                                    <Label VerticalTextAlignment="Center" VerticalOptions="Center"  HorizontalOptions="StartAndExpand"
+                                            Text="{Binding Name}" TextColor="Black" FontAttributes="Bold" FontSize="18" />
+                                    <Label VerticalTextAlignment="Center" VerticalOptions="Center"  HorizontalOptions="EndAndExpand"
+                                            Text="{Binding Price, StringFormat='€ {0:F2}'}" TextColor="Black" FontSize="18"/>
+                                </StackLayout>
+
+
+                                
+                                <StackLayout  Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" BindableLayout.ItemsSource="{Binding Fotos}" Orientation="Horizontal">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image  HeightRequest="40" WidthRequest="55" Aspect="AspectFill" Source="{Binding imageSource}"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                                
+
+
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
